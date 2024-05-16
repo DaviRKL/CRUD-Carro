@@ -1,27 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> CRUD - PHP com mysqli </title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<body>
-<style>
-img{
-	border:4px solid ;
-	color: #3DDDDF;
-	width:400px;
-}
-</style>
-<div class="topnav" align= center>
-		<a href="index.php">Início</a>
-		<a href='inclusao.php'>Incluir</a>
-		<a class="active" href='consulta.php'>Consultar</a>
-		<a href='geral.php'>Consulta Geral</a>
-		<a href='alteracao.php'>Alterar</a>
-		<a href='exclusao.php'>Excluir</a>
-	</div>
+﻿<?php 
+	include("./inc/header.php")
+?>
 	<h3 align = center> Tabela CRUD sobre Carros - Consulta</h3>
 <?php
 function convertedata($data){

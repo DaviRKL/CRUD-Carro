@@ -1,23 +1,69 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="utf-8"/>
-</head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<title> CRUD - PHP com mysqli </title>
-</head>
-<body>
-	<div class="topnav" align= center>
-	<a class="active" href="index.php">Início</a>
-	<a href='inclusao.php'>Incluir</a>
-	<a href='consulta.php'>Consultar</a>
-	<a href='geral.php'>Consulta Geral</a>
-	<a href='alteracao.php'>Alterar</a>
-	<a href='exclusao.php'>Excluir</a>
+﻿<?php
+	include ("./inc/header.php")
+?>
+<h3 align=center>Visão geral dos carros</h3>
+<form method="post" action="filtrogeral.php" class="form-inline">
+  <label for="cars" class="sr-only">Escolha uma marca de carro:</label>
+  <select id="cars" name="cars" class="form-select filtro mr-3">
+    <option value="ford">Ford</option>
+    <option value="jeep">Jeep</option>
+    <option value="porsche">Porsche</option>
+    <option value="toyota">Toyota</option>
+    <option value="nissan">Nissan</option>
+  </select>
+  <input class="btn btn-primary" type="submit" value="Selecionar">
+</form>
+
+<?php
+function convertedata($data)
+{
+
+	$novadata = new DateTime($data);
+	return $novadata->format("d/m/Y");
+}
+
+include_once ('conexao.php');
+
+// ajustando a instrução select para ordenar por produto
+$query = mysqli_query($conexao, "select * from tabelacarro order by id");
+
+if (!$query) {
+	echo '<input type="button" class="btn btn-primary" onclick="window.location=' . "'index.php'" . ';" value="Voltar"><br><br>';
+	die('<b>Query Inválida:</b>' . @mysqli_error($conexao));
+}
+?>
+<div class="container">
+	<div class="row">
+		<?php
+		while ($dados = mysqli_fetch_array($query)) {
+			$id = base64_encode($dados['id']);
+			$foto = !empty($dados['foto']) ? $dados['foto'] : 'SemImagem.png';
+			?>
+			<div class="col-md-4">
+				<div class="card mb-4">
+					<img src="imagens/<?php echo $foto; ?>" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h5 class="card-title"><?php echo $dados['modelo']; ?></h5>
+						<p class="card-text"><?php echo $dados['marca']; ?></p>
+						<p class="card-text"><small class="text-muted">Ano: <?php echo $dados['ano']; ?></small></p>
+						<p class="card-text"><small class="text-muted">Data de Cadastro:
+								<?php echo convertedata($dados['datacad']); ?></small></p>
+						<a href="verproduto.php?id=<?php echo $id; ?>" class="btn btn-ver">Ver carro</a>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+		?>
 	</div>
-	
-	<h3 align = center> Tabela CRUD sobre Carros</h3>
-	<h4 align = center> Feito por Davi Ryan Konuma Lima e Gabriel Sales Dorea</h4>
+</div>
+<?php
+	mysqli_close($conexao);
+?>
+<br>
 </body>
+
 </html>
+<?php
+include ("./inc/footer.php")
+	?>

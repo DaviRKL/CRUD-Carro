@@ -1,22 +1,6 @@
-Ôªø<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="utf-8"/>
-<title> CRUD - PHP com mysqli </title>
-</head>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="style.css">
-<body>
-
-<div class="topnav" align= center>
-	<a href="index.php">In√≠cio</a>
-	<a href='inclusao.php'>Incluir</a>
-	<a href='consulta.php'>Consultar</a>
-	<a class="active" href='geral.php'>Consulta Geral</a>
-	<a href='alteracao.php'>Alterar</a>
-	<a href='exclusao.php'>Excluir</a>
-	</div>
-	
+Ôªø<?php 
+	include("./inc/header.php")
+?>
 
 <?php
 
@@ -27,8 +11,8 @@
 	}
 
 	include_once('conexao.php');
-	// recuperando a informaÁ„o da URL
-	// verifica se par‚metro est· correto e dento da normalidade 
+	// recuperando a informaÔøΩÔøΩo da URL
+	// verifica se parÔøΩmetro estÔøΩ correto e dento da normalidade 
 	if(isset($_GET['id']) && is_numeric(base64_decode($_GET['id']))){
 			$id = base64_decode($_GET['id']);
 	} else {
